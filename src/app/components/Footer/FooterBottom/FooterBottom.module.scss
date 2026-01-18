@@ -1,0 +1,28 @@
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.socialContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+   
+}
+.imageWrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.image {
+    object-fit: contain;
+}

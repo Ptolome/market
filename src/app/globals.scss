@@ -1,0 +1,65 @@
+/* app/globals.scss */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Poppins', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Переменные для цветов и отступов */
+:root {
+  --primary-blue: #2563eb;
+  --bg-black: #000;
+  --bg-black-middle:#141416;
+  --bg-white: #ffffff;
+  --bg-white-middle: #f1f1f1;
+  --bg-gray: #d7d7d7;
+  --bg-gray-dark: #c3c3c3;
+  --white: #ffffff;
+  --black: #000;
+  --gray-light:#676767;
+  --gray-bg: #f8fafc;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  /* Адаптивные отступы */
+  --mobile-padding: 30px;
+  --tablet-padding: 67px;
+  --desktop-padding: 97px;
+}
+
+/* Адаптивные контейнеры */
+.container {
+  width: 100%;
+  padding: 0 var(--mobile-padding);
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 0 var(--tablet-padding);
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+    margin: 0 auto;
+
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--desktop-padding);
+  }
+}
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  height: auto;
+}
+

@@ -1,0 +1,95 @@
+// WeeklyTopNFT.module.scss
+
+.section {
+    padding: 80px 0;
+    position: relative;
+    background-color: var(--bg-white-middle);
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.title {
+    font-size:46px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #c5c5c5;
+    margin-bottom: 70px;
+    text-align: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonsContainer {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 70px;
+    box-shadow: 0 43px 34px -26px #0f0f0f;
+    
+}
+
+.stick {
+    position: absolute;
+    top:20px;
+    width: 2px;
+    height: 24px;
+    border: 1px solid var(--bg-gray);
+}
+
+.navButton {
+    width: 84px;
+    height: 64px;
+    border: none;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-dark);
+
+    &:hover {
+        background-color: var(--bg-gray);
+      
+        color: white;
+    }
+
+    &:disabled,
+    &.navButtonDisabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+
+        &:hover {
+            background: white;
+            border-color: var(--border-color);
+            color: var(--text-dark);
+        }
+    }
+}
+.left {
+    border-radius:18px 0 0 18px; 
+}
+.right {
+    border-radius: 0  18px 18px 0;
+}
+.fullWidthSwiper {
+    width: 100%;
+        :global(.swiper-slide) {
+            width: auto;
+ 
+        }
+}
+
+.slide {
+    height: auto;
+    width: auto;
+}
