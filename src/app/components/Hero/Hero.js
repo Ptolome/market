@@ -7,7 +7,9 @@ import arrow from '../../../../public/Icons/arrow-spiral.svg'
 import Button from '@/app/lib/UI/ButtonMain/Button';
 import styles from './Hero.module.scss';
 import cn from 'classnames'
+import { useBreakpoints } from '@/app/lib/hooks/useBreakpoints';
 const HeroSection = () => {
+  const {isMobile}=useBreakpoints()
   const imageVariants = {
     hidden: { 
       x: 100, 
@@ -96,7 +98,7 @@ const HeroSection = () => {
 
   return (
     <section className={styles.hero}>
-      <div className={cn(styles.container, 'container')}>
+      <div className={cn(styles.container)}>
         
         <div className={styles.leftSection}>
                     
@@ -128,7 +130,7 @@ const HeroSection = () => {
             </Button>
           </motion.div>
           
-          <motion.div 
+          {isMobile && <motion.div 
           variants={statisticVariants}
           initial="hidden"
           animate="visible"className={styles.stats}>
@@ -138,7 +140,7 @@ const HeroSection = () => {
                 <div className={styles.statLabel}>{label}</div>
               </div>
             ))}
-          </motion.div>
+          </motion.div>}
         </div>
 
         <div className={styles.rightSection}>

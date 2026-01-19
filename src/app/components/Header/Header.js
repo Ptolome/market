@@ -18,7 +18,7 @@ export default function Header() {
 
   return (
     <header className={cn(styles.header, {[styles.scrolled]:isScrolled})}>
-      <div className="container">
+      <div className={styles.container}>
         {isRetinaMobile ? <HeaderMobile/>:
           <div className={styles.headerContent}>
           <Image src={logo} width={53} height={53} alt='logo'></Image>
