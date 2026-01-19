@@ -1,7 +1,6 @@
-
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './MobileModal.module.scss';
 import cn from 'classnames';
 
@@ -17,12 +16,29 @@ export default function MobileModal({
 }) {
   const modalRef = useRef(null);
   const contentRef = useRef(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const [shouldRender, setShouldRender] = useState(isOpen);
 
-  // Блокируем скролл при открытии
+
   useEffect(() => {
     if (isOpen) {
+      setShouldRender(true);
+      setIsClosing(false);
+    } else if (shouldRender) {
+   
+      setIsClosing(true);
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+        setIsClosing(false);
+      }, 300); 
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, shouldRender]);
+
+  useEffect(() => {
+    if (shouldRender && !isClosing) {
       document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none'; // Для мобильных устройств
+      document.body.style.touchAction = 'none';
     } else {
       document.body.style.overflow = 'auto';
       document.body.style.touchAction = 'auto';
@@ -32,44 +48,53 @@ export default function MobileModal({
       document.body.style.overflow = 'auto';
       document.body.style.touchAction = 'auto';
     };
-  }, [isOpen]);
+  }, [shouldRender, isClosing]);
 
-  // Закрытие по ESC
+  // Обработка Escape
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
+      if (e.key === 'Escape' && !isClosing) {
+        handleClose();
       }
     };
 
-    if (isOpen) {
+    if (shouldRender && !isClosing) {
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isOpen, onClose]);
+  }, [shouldRender, isClosing]);
 
-  // Клик по оверлею
-  const handleOverlayClick = (e) => {
-    if (closeOnOverlayClick && e.target === e.currentTarget) {
-      onClose();
+  const handleClose = () => {
+    if (!isClosing) {
+      setIsClosing(true);
+     
+      setTimeout(() => {
+        onClose();
+      }, 300);
     }
   };
 
-  // Фокусировка на модалке при открытии (для доступности)
+  const handleOverlayClick = (e) => {
+    if (closeOnOverlayClick && e.target === e.currentTarget && !isClosing) {
+      handleClose();
+    }
+  };
+
+
   useEffect(() => {
-    if (isOpen && modalRef.current) {
+    if (shouldRender && !isClosing && modalRef.current) {
       modalRef.current.focus();
     }
-  }, [isOpen]);
+  }, [shouldRender, isClosing]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   return (
     <div 
-      className={styles.overlay}
+      className={cn(styles.overlay, { [styles.closing]: isClosing })}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -77,49 +102,27 @@ export default function MobileModal({
     >
       <div 
         ref={modalRef}
-        className={cn(styles.modal, className)}
+        className={cn(styles.modal, className, { [styles.closing]: isClosing })}
         tabIndex={-1}
       >
-        {/* Хедер модалки (опционально) */}
         {!hideHeader && (
           <div className={styles.modalHeader}>
-            {title && (
-              <h2 
-                id="mobile-modal-title" 
-                className={styles.modalTitle}
-              >
-                {title}
-              </h2>
-            )}
+           
             
             {showCloseButton && (
               <button
                 type="button"
                 className={styles.closeButton}
-                onClick={onClose}
+                onClick={handleClose}
                 aria-label="Закрыть"
+                disabled={isClosing}
               >
-                <svg 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M18 6L6 18M6 6L18 18" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                x
               </button>
             )}
           </div>
         )}
 
-        {/* Контент модалки */}
         <div 
           ref={contentRef}
           className={styles.modalContent}

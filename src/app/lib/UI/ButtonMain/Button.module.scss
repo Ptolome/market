@@ -36,3 +36,11 @@
             color: var(--black);
     }
 }
+.default {
+    border: none;
+    padding: none;
+    background-color: inherit;
+    &:hover:not(:disabled) {
+            background-color: inherit;
+             }
+}

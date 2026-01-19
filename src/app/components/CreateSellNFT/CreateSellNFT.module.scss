@@ -1,13 +1,43 @@
 .container {
+    width: 100%;
+    padding: 0 var(--mobile-padding);
+    overflow: hidden;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+        padding: 0 var(--tablet-padding);
+    }
+
+    @media (min-width: 1024px) {
+        padding: 0 var(--tablet-padding);
+    }
+
+    @media (min-width: 1440px) {
+        padding: 0 var(--desktop-padding);
+    }
+}
+.wrapper {
+    position: relative;
     display: flex;
     justify-content: space-between;
     background-color: var(--bg-black-middle);
     padding: 31px;
     border-radius: 30px;
-    margin: 0 auto;
     margin-bottom: 120px;
     margin-top: 120px;
 
+    @media (max-width:900) {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 320px;
+    }
+
+    @media (max-width:600) {
+        margin-bottom: 220px;
+        }
+
+ 
+    
 }
 
 .title {
@@ -17,6 +47,12 @@
     font-size: 45px;
     margin-bottom: 20px;
     margin-top: 18px;
+    @media (max-width:900) {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
 }
 
 .subtitle {
@@ -25,11 +61,28 @@
     font-weight: 600;
     font-size: 20px;
     margin-bottom: 57px;
+    @media (max-width:900) {
+        font-size: 10px;
+        text-align: center;
+        margin-bottom: 22px;
+    }
 }
 
 .buttons {
     display: flex;
     gap:24px;
+
+    @media (max-width:900) {
+        margin-bottom: 90px ;
+    }
+   
+    @media (max-width:600) {
+        margin-bottom: 60px;
+    }
+
+    @media (max-width:375) {
+        margin-bottom: 40px;
+    }
 }
 
 .buttonLeft {
@@ -44,6 +97,18 @@
     position: relative;
     width: 369px;
     height: 249px;
+    @media (max-width:900) {
+            position:absolute; 
+            bottom:-170px;
+        }
+    @media (max-width:600) {
+        width:300px;
+    }
+    @media (max-width:375) {
+             width:251px;
+             height: 130px;
+            bottom: -80px;
+         }
 
 }
 

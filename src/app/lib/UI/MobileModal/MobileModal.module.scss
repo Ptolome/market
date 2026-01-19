@@ -1,4 +1,3 @@
-// components/MobileModal/MobileModal.module.scss
 .overlay {
     position: fixed;
     top: 0;
@@ -8,10 +7,14 @@
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 10000;
     animation: fadeIn 0.3s ease;
+    opacity: 1;
 
-    // Только для мобильных устройств
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         display: none;
+    }
+
+    &.closing {
+        animation: fadeOut 0.3s ease forwards;
     }
 }
 
@@ -25,6 +28,16 @@
     }
 }
 
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -34,16 +47,16 @@
     background: white;
     display: flex;
     flex-direction: column;
-    animation: slideDown 0.3s ease;
+    animation: slideIn 0.3s ease;
     overflow: hidden;
+    transform: translateY(0);
 
-    // Для планшетов/десктопов (скрываем)
-    @media (min-width: 768px) {
-        display: none;
+    &.closing {
+        animation: slideOut 0.3s ease forwards;
     }
 }
 
-@keyframes slideDown {
+@keyframes slideIn {
     from {
         transform: translateY(-100%);
     }
@@ -53,19 +66,16 @@
     }
 }
 
-.modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #e2e8f0;
-    background: white;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    min-height: 60px;
-    flex-shrink: 0;
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
 }
+
 
 .modalTitle {
     margin: 0;
@@ -89,6 +99,8 @@
     transition: all 0.2s ease;
     flex-shrink: 0;
     margin-left: 12px;
+    font-size: 20px;
+    font-weight: 400;
 
     &:hover {
         background: #edf2f7;
@@ -104,9 +116,9 @@
         outline-offset: 2px;
     }
 
-    svg {
-        width: 20px;
-        height: 20px;
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 }
 
@@ -114,51 +126,19 @@
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    -webkit-overflow-scrolling: touch; // Плавный скролл на iOS
+    -webkit-overflow-scrolling: touch;
 
-    // Убираем padding если контент сам управляет отступами
     &.noPadding {
         padding: 0;
     }
 
-    // Для очень длинного контента
     &.scrollable {
         padding-bottom: env(safe-area-inset-bottom, 20px);
     }
 }
 
-// Варианты для разного типа контента
 .fullScreen {
     .modalContent {
         padding: 0;
-    }
-}
-
-// Анимация закрытия
-.modal.closing {
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-100%);
-    }
-}
-
-.overlay.closing {
-    animation: fadeOut 0.3s ease;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
     }
 }

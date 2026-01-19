@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+    @media (max-width:900px) {
+        align-items: baseline;
+    }
 }
 
 .menuContainer {
@@ -11,18 +15,16 @@
     gap: 50px;
 }
 
-.socialContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-   
-}
-.imageWrapper {
-    position: relative;
-    width: 24px;
-    height: 24px;
-}
-
-.image {
-    object-fit: contain;
+.iconsMobile {
+    @media (max-width:900px) {
+        padding-block: 15px;
+        gap:20px;
+        & a {
+            & div {
+                    width: 17px;
+                    height: 17px;
+                }
+        }
+       
+    }
 }

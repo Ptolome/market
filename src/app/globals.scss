@@ -38,20 +38,23 @@ body {
   width: 100%;
   padding: 0 var(--mobile-padding);
   overflow: hidden;
+  margin: 0 auto;
 
   @media (min-width: 768px) {
     padding: 0 var(--tablet-padding);
+    
+
   }
 
   @media (min-width: 1024px) {
-    max-width: 1024px;
-    margin: 0 auto;
+    padding: 0 var(--tablet-padding);
+
 
   }
 
   @media (min-width: 1440px) {
-    max-width: 1440px;
-    margin: 0 auto;
+    
+
     padding: 0 var(--desktop-padding);
   }
 }
