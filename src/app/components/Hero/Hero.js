@@ -130,7 +130,7 @@ const HeroSection = () => {
             </Button>
           </motion.div>
           
-          {isMobile && <motion.div 
+          {!isMobile && <motion.div 
           variants={statisticVariants}
           initial="hidden"
           animate="visible"className={styles.stats}>
